@@ -1,3 +1,3 @@
 class Config:
-    SIZE = WIDTH, HEIGHT = 600, 400
+    SIZE = WIDTH, HEIGHT = 600, 600
     FPS = 60

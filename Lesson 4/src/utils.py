@@ -2,8 +2,6 @@ import os
 import sys
 
 import pygame as pg
-from PIL import Image
-from PIL import ImageFilter
 
 
 def load_image(image_path: str, color_key=None) -> pg.Surface:
@@ -47,13 +45,10 @@ def load_many_images(
     height = orig_image.get_height() // count_rows
 
     rect = pg.Rect(0, 0, width * 0.95, height * 0.95)
-    # smooth_filter = ImageFilter.GaussianBlur(0)
     for row in range(count_rows):
         for column in range(count_columns):
             sub_image = orig_image.subsurface(rect.move((column + 0.025) * width, (row + 0.025) * height))
             sub_image.set_colorkey(sub_image.get_at((0, 0)))
 
             result.append(sub_image)
-
-    # result.append(orig_image)
     return result

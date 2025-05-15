@@ -17,6 +17,7 @@ def main(screen: pg.Surface):
     boss_2_images = utils.load_many_images('boss_2.png', 2, 2, None, (200, 200))
     boss_3_images = utils.load_many_images('boss_3.png', 2, 2, None, (200, 200))
     boss_4_images = utils.load_many_images('boss_4.png', 2, 2, None, (200, 200))
+    boss_5_images = utils.load_many_images('boss_5.png', 2, 2, None, (200, 200))
     i = 0
 
     running = True
@@ -34,7 +35,7 @@ def main(screen: pg.Surface):
         screen.blit(boss_2_images[i // 10 % 4], (000, 200))
         screen.blit(boss_3_images[i // 10 % 4], (200, 200))
         screen.blit(boss_4_images[i // 10 % 4], (400, 200))
-
+        screen.blit(boss_5_images[i // 10 % 4], (000, 400))
         pg.display.flip()
         clock.tick(Config.FPS)
 
