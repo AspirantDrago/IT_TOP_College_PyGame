@@ -26,6 +26,10 @@ class Character(pg.sprite.Sprite):
         self.image: pg.Surface = self.images[self.emotion]
         self.rect = self.image.get_rect()
 
+    def set_emotion(self, emotion: CharacterEmotion) -> None:
+        self.emotion = emotion
+        self.image = self.images[self.emotion]
+
     @classmethod
     def class_init(cls):
         if not cls.IMAGES:
