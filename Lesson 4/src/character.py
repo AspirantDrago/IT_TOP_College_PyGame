@@ -16,11 +16,14 @@ class Character(pg.sprite.Sprite):
     IMAGE_PATH: str | None = None
     IMAGES: list[pg.Surface] = []
 
-    def __init__(self, *args):
+    def __init__(self, *args, size: tuple[int, int] | None = None):
         super().__init__(*args)
         self.class_init()
         self.emotion = CharacterEmotion.NORMAL
-        self.image: pg.Surface = self.IMAGES[self.emotion]
+        self.images = self.IMAGES.copy()
+        if size:
+            self.images = [pg.transform.scale(image, size).convert_alpha() for image in self.images]
+        self.image: pg.Surface = self.images[self.emotion]
         self.rect = self.image.get_rect()
 
     @classmethod

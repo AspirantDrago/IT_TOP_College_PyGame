@@ -31,8 +31,11 @@ class SceneManager:
             for event in events:
                 if event.type == pg.QUIT:
                     raise SkipException()
-                elif event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
-                    raise SkipException()
+                elif event.type == pg.KEYDOWN:
+                    if event.key == pg.K_ESCAPE:
+                        raise SkipException()
+                    elif event.key == pg.K_SPACE:
+                        return
             self.surface.fill(self.background)
             self.group.update()
             self.group.draw(self.surface)
