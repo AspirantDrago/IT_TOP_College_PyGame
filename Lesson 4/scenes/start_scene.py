@@ -63,4 +63,5 @@ def start_scene(screen: pg.Surface):
                     4 + i / 2, 5 + i / 2)
 
     except SkipException:
+        pg.mixer.music.stop()
         return
