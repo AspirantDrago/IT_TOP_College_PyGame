@@ -82,6 +82,10 @@ class GroupTile:
 tile_images = {
     '.': load_image('tiles/floor.png'),
     '#': load_image('tiles/wall.png'),
+    **{
+        c: img
+        for c, img in zip('TABLtabl', load_many_images('tiles/table.png', 4, 2, None))
+    }
 }
 tile_images = {
     c: pg.transform.scale(img, (Config.TILE_SIZE, Config.TILE_SIZE))
@@ -97,8 +101,12 @@ def read_map(my_map: list[str]) -> GroupTile:
             if cell == ' ':
                 continue
             img = tile_images[cell]
+            if cell in 'TABLtabl':
+                tile = Tile(tile_images['.'], col * Config.TILE_SIZE, row * Config.TILE_SIZE)
+                result.all_tile.add(tile)
             tile = Tile(img, col * Config.TILE_SIZE, row * Config.TILE_SIZE)
             result.all_tile.add(tile)
-            if cell in '#':     # Символы препятствий
+
+            if cell in '#TABLtabl':     # Символы препятствий
                 result.obstacle.add(tile)
     return result

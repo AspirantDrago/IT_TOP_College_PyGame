@@ -6,7 +6,11 @@ from .utils import GroupTile
 
 class Player(Character):
     IMAGE_PATH = 'player.png'
-    SPEED = 1
+    SPEED = 5
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.mask = pg.mask.from_surface(self.image)
 
     def update(
             self,
@@ -23,9 +27,12 @@ class Player(Character):
             dy -= self.SPEED
         if keys[pg.K_DOWN] or keys[pg.K_s]:
             dy += self.SPEED
-        self.rect.move_ip(dx, dy)
-        if groups and pg.sprite.spritecollideany(self, groups.obstacle):
-            self.rect.move_ip(-dx, -dy)
+        self.rect.move_ip(dx, 0)
+        if groups and pg.sprite.spritecollideany(self, groups.obstacle, pg.sprite.collide_mask):
+            self.rect.move_ip(-dx, -0)
+        self.rect.move_ip(0, dy)
+        if groups and pg.sprite.spritecollideany(self, groups.obstacle, pg.sprite.collide_mask):
+            self.rect.move_ip(0, -dy)
 
 
 
